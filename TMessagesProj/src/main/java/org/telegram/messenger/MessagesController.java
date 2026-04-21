@@ -6650,17 +6650,12 @@ public class MessagesController extends BaseController implements NotificationCe
         if (chat == null) {
             return false;
         }
-        if (chat.migrated_to != null) {
-            TLRPC.Chat migratedTo = getChat(chat.migrated_to.channel_id);
-            if (migratedTo != null) {
-                return migratedTo.noforwards;
-            }
-        }
-        return chat.noforwards;
+        return false;
     }
 
     public boolean isChatNoForwards(long chatId) {
-        return isChatNoForwards(getChat(chatId));
+        return false;
+       // return isChatNoForwards(getChat(chatId));
     }
 
     public boolean isPeerNoForwards(long dialogId) {
@@ -6668,15 +6663,16 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public boolean isUserNoForwards(long userId) {
-        return isUserNoForwards(getUserFull(userId));
+        return false;
+      //  return isUserNoForwards(getUserFull(userId));
     }
 
     public boolean isUserNoForwards(TLRPC.UserFull userFull) {
         if (userFull == null) {
             return false;
         }
-
-        return userFull.noforwards_peer_enabled || userFull.noforwards_my_enabled;
+        return false;
+       // return userFull.noforwards_peer_enabled || userFull.noforwards_my_enabled;
     }
 
     public TLRPC.User getUser(Long id) {

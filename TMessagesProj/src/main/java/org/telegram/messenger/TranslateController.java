@@ -164,7 +164,6 @@ public class TranslateController extends BaseController {
             messageObject != null &&
             messageObject.messageOwner != null &&
             !messageObject.isOutOwner() &&
-            !messageObject.isRestrictedMessage &&
             !messageObject.isSponsored() &&
             (
                 messageObject.type == MessageObject.TYPE_TEXT ||
@@ -188,27 +187,14 @@ public class TranslateController extends BaseController {
     }
 
     public boolean isDialogTranslatable(long dialogId) {
-        return (
-            translatableDialogs.contains(dialogId) &&
-            isFeatureAvailable(dialogId) &&
-            !DialogObject.isEncryptedDialog(dialogId) &&
-            getUserConfig().getClientUserId() != dialogId
-            /* DialogObject.isChatDialog(dialogId) &&*/
-        );
+        return true;
     }
 
     public boolean isTranslateDialogHidden(long dialogId) {
         if (hideTranslateDialogs.contains(dialogId)) {
             return true;
         }
-        TLRPC.ChatFull chatFull = getMessagesController().getChatFull(-dialogId);
-        if (chatFull != null) {
-            return chatFull.translations_disabled;
-        }
-        TLRPC.UserFull userFull = getMessagesController().getUserFull(dialogId);
-        if (userFull != null) {
-            return userFull.translations_disabled;
-        }
+
         return false;
     }
 

@@ -397,20 +397,6 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
     }
 
     public boolean hasSpoilers() {
-        if (captionLayout != null && captionLayout.textLayoutBlocks != null) {
-            for (MessageObject.TextLayoutBlock bl : captionLayout.textLayoutBlocks) {
-                if (!bl.spoilers.isEmpty()) {
-                    return true;
-                }
-            }
-        }
-        if (getMessageObject() != null && getMessageObject().textLayoutBlocks != null) {
-            for (MessageObject.TextLayoutBlock bl : getMessageObject().textLayoutBlocks) {
-                if (!bl.spoilers.isEmpty()) {
-                    return true;
-                }
-            }
-        }
         return false;
     }
 
